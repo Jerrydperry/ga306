@@ -1,0 +1,20 @@
+//-----------------
+// N-gons Select   
+//-----------------
+
+string $selection[] = `ls -sl`;
+
+if ( size($selection) ){
+    //Change to Component mode to retain object highlighting for better visibility
+    changeSelectMode -component;
+    //Change to Face Component Mode
+    selectType -smp 0 -sme 1 -smf 0 -smu 0 -pv 0 -pe 1 -pf 0 -puv 0;
+    //Select Object/s and Run Script to highlight N-Gons
+    polySelectConstraint -mode 3 -type 0x0008 -size 3;
+    polySelectConstraint -disable;
+    int $nPolys[] = `polyEvaluate -faceComponent`;
+    print ("// " + $nPolys[0] + " N-Gon(s) Selected.");
+    }
+else{
+    print("// No object(s) selected. Make a selection to check for N-Gons.");
+}
